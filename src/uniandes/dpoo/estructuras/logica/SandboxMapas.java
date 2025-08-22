@@ -155,9 +155,19 @@ public class SandboxMapas
      * @param otroArreglo El arreglo de enteros con el que se debe comparar
      * @return True si todos los elementos del arreglo están dentro de los valores del mapa
      */
-    public boolean compararValores( String[] otroArreglo )
-    {
-        return false;
-    }
+	public boolean compararValores(String[] otroArreglo) {
+
+		// Obtenemos la colección de valores actuales del mapa
+		Collection<String> valoresMapa = mapaCadenas.values();
+
+		// Verificamos que cada valor del arreglo esté dentro de esos valores
+		
+		for (String val : otroArreglo) {
+			if (!valoresMapa.contains(val)) {
+				return false; // Si falta alguno, devuelve false
+			}
+		}
+		return true; // Si todos están
+	}
 
 }
