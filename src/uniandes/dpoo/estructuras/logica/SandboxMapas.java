@@ -75,11 +75,11 @@ public class SandboxMapas
     	        return null; // No hay nada en el mapa
     	    }
 
-    	    // Crear una lista con todas las llaves
+    	    // Creao una lista con todas las llaves
     	    java.util.List<String> llaves = new java.util.ArrayList<>(mapaCadenas.keySet());
-    	    java.util.Collections.sort(llaves); // Ordenarlas de menor a mayor
+    	    java.util.Collections.sort(llaves); // de menor a mayor
 
-    	    return llaves.get(0); // Retornar la primera
+    	    return llaves.get(0); 
     }
 
     /**
@@ -91,12 +91,12 @@ public class SandboxMapas
     public String getUltima( )
     {
     	if (mapaCadenas.isEmpty()) {
-            return null; // No hay nada en el mapa
+            return null; 
         }
 
         // Crear una lista con todos los valores
         java.util.List<String> valores = new java.util.ArrayList<>(mapaCadenas.values());
-        java.util.Collections.sort(valores); // Ordenarlos de menor a mayor
+        java.util.Collections.sort(valores); //  de menor a mayor
 
         return valores.get(valores.size() - 1); // Retornar el último (el más grande)
     }
@@ -114,6 +114,7 @@ public class SandboxMapas
 
         // Recorremos todas las llaves originales del mapa
         for (String llave : mapaCadenas.keySet()) {
+        	
             // Convertimos cada llave a mayúsculas y la agregamos a la lista
             llavesMayusculas.add(llave.toUpperCase());
         }
@@ -143,7 +144,7 @@ public class SandboxMapas
     {
     	// invertimos la cadena recibida
         String claveInvertida = new StringBuilder(cadena).reverse().toString();
-        // guardamos en el mapa: clave invertida -> valor original
+        // guardamos en el mapa: clave invertida a valor original
         mapaCadenas.put(claveInvertida, cadena);
     }
 
@@ -171,7 +172,7 @@ public class SandboxMapas
         for (Map.Entry<String, String> entrada : mapaCadenas.entrySet()) {
             if (entrada.getValue().equals(valor)) {
                 llaveAEliminar = entrada.getKey();
-                break; // Lo encontramos, podemos salir
+                break; // Lo encontramos!!
             }
         }
 
@@ -194,7 +195,7 @@ public class SandboxMapas
 
         // Recorro lista de objetos
         for (Object obj : objetos) {
-            String cadena = obj.toString(); // convierto a String
+            String cadena = obj.toString(); 
             String llaveInvertida = new StringBuilder(cadena).reverse().toString();
             
             // Agrego al mapa
@@ -217,7 +218,7 @@ public class SandboxMapas
             nuevoMapa.put(llaveMayus, entrada.getValue());
         }
 
-        // Reemplazar el mapa original con el nuevo
+        // Reemplazo con el nuev
         mapaCadenas = nuevoMapa;
     	
     	
@@ -231,7 +232,7 @@ public class SandboxMapas
      */
 	public boolean compararValores(String[] otroArreglo) {
 
-		// Obtenemos la colección de valores actuales del mapa
+		// Obtenemos los valores actuales del mapa
 		Collection<String> valoresMapa = mapaCadenas.values();
 
 		// Verificamos que cada valor del arreglo esté dentro de esos valores
