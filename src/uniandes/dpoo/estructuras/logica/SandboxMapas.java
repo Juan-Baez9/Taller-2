@@ -39,10 +39,16 @@ public class SandboxMapas
      * Retorna una lista con las cadenas del mapa (los valores) ordenadas lexicográficamente
      * @return Una lista ordenada con las cadenas que conforman los valores del mapa
      */
-    public List<String> getValoresComoLista( )
-    {
-        return null;
-    }
+	public List<String> getValoresComoLista() 
+	{
+		// Creammos una lista con los valores del mapa usando pues, values()
+		List<String> lista = new java.util.ArrayList<>(mapaCadenas.values());
+
+		// Ordenamos lexicográficamente
+		java.util.Collections.sort(lista);
+
+		return lista;
+	}
 
     /**
      * Retorna una lista con las llaves del mapa ordenadas lexicográficamente de mayor a menor
@@ -50,7 +56,11 @@ public class SandboxMapas
      */
     public List<String> getLlavesComoListaInvertida( )
     {
-        return null;
+        List<String> lista = new java.util.ArrayList<>(mapaCadenas.keySet());
+        
+        java.util.Collections.sort(lista, java.util.Collections.reverseOrder());
+        
+        return lista;
     }
 
     /**
@@ -61,7 +71,15 @@ public class SandboxMapas
      */
     public String getPrimera( )
     {
-        return null;
+    	 if (mapaCadenas.isEmpty()) {
+    	        return null; // No hay nada en el mapa
+    	    }
+
+    	    // Crear una lista con todas las llaves
+    	    java.util.List<String> llaves = new java.util.ArrayList<>(mapaCadenas.keySet());
+    	    java.util.Collections.sort(llaves); // Ordenarlas de menor a mayor
+
+    	    return llaves.get(0); // Retornar la primera
     }
 
     /**
@@ -72,7 +90,15 @@ public class SandboxMapas
      */
     public String getUltima( )
     {
-        return null;
+    	if (mapaCadenas.isEmpty()) {
+            return null; // No hay nada en el mapa
+        }
+
+        // Crear una lista con todos los valores
+        java.util.List<String> valores = new java.util.ArrayList<>(mapaCadenas.values());
+        java.util.Collections.sort(valores); // Ordenarlos de menor a mayor
+
+        return valores.get(valores.size() - 1); // Retornar el último (el más grande)
     }
 
     /**
@@ -83,7 +109,17 @@ public class SandboxMapas
      */
     public Collection<String> getLlaves( )
     {
-        return null;
+    	// Creamos una lista nueva donde guardaremos las llaves en mayúsculas
+        Collection<String> llavesMayusculas = new java.util.ArrayList<>();
+
+        // Recorremos todas las llaves originales del mapa
+        for (String llave : mapaCadenas.keySet()) {
+            // Convertimos cada llave a mayúsculas y la agregamos a la lista
+            llavesMayusculas.add(llave.toUpperCase());
+        }
+
+        // Retornamos la lista con las llaves en mayúsculas
+        return llavesMayusculas;
     }
 
     /**
@@ -117,18 +153,32 @@ public class SandboxMapas
      * Elimina una cadena del mapa, dada la llave
      * @param cadena La llave para identificar el valor que se debe eliminar
      */
-    public void eliminarCadenaConLLave( String llave )
-    {
-
-    }
+	public void eliminarCadenaConLLave(String llave) 
+	{
+		mapaCadenas.remove(llave);
+	}
 
     /**
      * Elimina una cadena del mapa, dado el valor
      * @param cadena El valor que se debe eliminar
      */
+	
     public void eliminarCadenaConValor( String valor )
     {
+    	// Recorremos las llaves y valores para encontrar la que tenga ese valor
+        String llaveAEliminar = null;
 
+        for (Map.Entry<String, String> entrada : mapaCadenas.entrySet()) {
+            if (entrada.getValue().equals(valor)) {
+                llaveAEliminar = entrada.getKey();
+                break; // Lo encontramos, podemos salir
+            }
+        }
+
+        // Si encontramos una llaveEliminar cambio es decir entro al if es decir la encontramos la borramos
+        if (llaveAEliminar != null) {
+            mapaCadenas.remove(llaveAEliminar);
+        }
     }
 
     /**
@@ -139,7 +189,17 @@ public class SandboxMapas
      */
     public void reiniciarMapaCadenas( List<Object> objetos )
     {
+    	// Limpio el mapa actual
+        mapaCadenas.clear();
 
+        // Recorro lista de objetos
+        for (Object obj : objetos) {
+            String cadena = obj.toString(); // convierto a String
+            String llaveInvertida = new StringBuilder(cadena).reverse().toString();
+            
+            // Agrego al mapa
+            mapaCadenas.put(llaveInvertida, cadena);
+        }
     }
 
     /**
@@ -147,6 +207,20 @@ public class SandboxMapas
      */
     public void volverMayusculas( )
     {
+    	 // Creo un nuevo mapa temporal para guardar las llaves en mayúsculas
+        Map<String, String> nuevoMapa = new HashMap<>();
+
+        // Recorro el mapa original y transformo cada llave a mayúsculas
+        
+        for (Map.Entry<String, String> entrada : mapaCadenas.entrySet()) {
+            String llaveMayus = entrada.getKey().toUpperCase();
+            nuevoMapa.put(llaveMayus, entrada.getValue());
+        }
+
+        // Reemplazar el mapa original con el nuevo
+        mapaCadenas = nuevoMapa;
+    	
+    	
 
     }
 
